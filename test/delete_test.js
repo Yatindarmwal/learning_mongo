@@ -20,7 +20,6 @@ describe('Deleting a user', () => {
         User.remove({ name: 'joe' })
             .then(() => User.findOne({ name: 'joe' }))
             .then((user) => {
-                console.log(user)
                 assert(user === null);
                 done();
             });
@@ -29,7 +28,6 @@ describe('Deleting a user', () => {
         User.findOneAndRemove({ name: 'joe' })
             .then(() => User.findOne({ name: 'joe' }))
             .then((user) => {
-                console.log(user)
                 assert(user === null);
                 done();
             });
@@ -38,7 +36,6 @@ describe('Deleting a user', () => {
         User.findByIdAndRemove(joe._id)
             .then(() => User.findOne({ name: 'joe' }))
             .then((user) => {
-                console.log(user)
                 assert(user === null);
                 done();
             });
