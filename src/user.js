@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 const UserSchema = new schema({
-    name: String
+    name: String,
+    postCount: Number
 });
 
 const User = mongoose.model('users', UserSchema);
