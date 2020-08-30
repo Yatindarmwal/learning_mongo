@@ -1,6 +1,5 @@
 `use strict`;
 
-const postSchema = require('./post');
 const mongoose = require('mongoose');
 const PostSchema = require('./post');
 const schema = mongoose.Schema;
@@ -14,8 +13,11 @@ const UserSchema = new schema({
             message: 'Name must be longer then 2 characters.'
         }
     },
-    postCount: Number,
     posts: [PostSchema]
+});
+
+UserSchema.virtual('postCount').get(function () {
+    return this.posts.length;
 });
 
 const User = mongoose.model('users', UserSchema);
