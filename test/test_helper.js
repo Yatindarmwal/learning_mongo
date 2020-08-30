@@ -14,8 +14,12 @@ before((done) => {
 });
 
 beforeEach((done) => {
-    mongoose.connection.collections.users.drop(() => {
-        //Ready to run the next test
-        done();
+    let { users, comments, blog_posts } = mongoose.connection.collections;
+    users.drop(() => {
+        comments.drop(() => {
+            blog_posts.drop(() => {
+                done();
+            });
+        });
     });
 });
