@@ -1,6 +1,6 @@
 const assert = require('assert');
 const User = require('../src/user');
-const { error } = require('console');
+
 
 describe('Validating record', () => {
     it('requires a user name ', () => {
