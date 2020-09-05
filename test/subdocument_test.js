@@ -53,4 +53,35 @@ describe('Sub documents', () => {
                 done();
             });
     });
+    it.skip('can fetch specific entry from a sub document', (done) => {
+        const joe = new User({
+            name: 'Joe',
+            posts: [
+                {
+                    title: 'post1',
+                    created: '1/2/3'
+                },
+                {
+                    title: 'post2',
+                    created: '2/3'
+                },
+                {
+                    title: 'post1',
+                    created: '1/556'
+                }
+            ]
+        });
+        joe.save()
+            .then(() => {
+                User.aggregate([
+                    { $match: { "name": "Joe" } },
+                    { $unwind: "$posts" },
+                    { $match: { "posts.title": "post1" } },
+                    { $project: { "posts": "$posts.title", "created": "$posts.created" } }
+                ]
+                ).then((data) => {
+                    console.log(data);
+                });
+            });
+    });
 });

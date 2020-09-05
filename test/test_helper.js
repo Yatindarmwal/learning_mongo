@@ -4,7 +4,7 @@ const { before } = require('mocha');
 mongoose.Promise = global.Promise;
 
 before((done) => {
-    mongoose.connect('mongodb://localhost/user_test');
+    mongoose.connect('mongodb://localhost/user_test',{ useNewUrlParser: true });
     mongoose.connection
         .once('open', () => done())
         .on('error', (error) => {
